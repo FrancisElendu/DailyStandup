@@ -14,4 +14,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DailyStandup.Application\DailyStandup.Application.csproj" />
+    <ProjectReference Include="..\DailyStandup.Domain\DailyStandup.Domain.csproj" />
+    <ProjectReference Include="..\DailyStandup.Infrastructure\DailyStandup.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
