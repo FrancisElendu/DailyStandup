@@ -7,9 +7,5 @@ using System.Threading.Tasks;
 
 namespace DailyStandup.Application.Commands
 {
-    //public class GenerateStandupCommand
-    //{
-
-    //}
     public record GenerateStandupCommand(DateTime ForDate) : IRequest<StandupResultDto>;
 }

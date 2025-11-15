@@ -1,11 +1,6 @@
 ﻿using DailyStandup.Application.Commands;
 using DailyStandup.Application.Interface;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyStandup.Application.Handlers
 {
