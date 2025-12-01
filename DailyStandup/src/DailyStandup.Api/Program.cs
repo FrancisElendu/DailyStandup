@@ -20,7 +20,9 @@ Log.Logger = new LoggerConfiguration()
 .CreateLogger();
 
 
-builder.Host.UseSerilog();
+//builder.Host.UseSerilog();
+// Replace default logging pipeline
+builder.Host.UseSerilog(Log.Logger);
 
 
 // Add services
@@ -41,13 +43,13 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavi
 // Infrastructure clients
 builder.Services.AddHttpClient<IJiraClient, JiraClient>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["Jira:BaseUrl"]);
+    client.BaseAddress = new Uri(builder.Configuration["Jira:BaseUrl"]!);
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
 builder.Services.AddHttpClient<IGitHubClient, GitHubClient>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["GitHub:BaseUrl"]);
+    client.BaseAddress = new Uri(builder.Configuration["GitHub:BaseUrl"]!);
     client.DefaultRequestHeaders.Add("User-Agent", "DailyStandupService");
     if (!string.IsNullOrEmpty(builder.Configuration["GitHub:Token"]))
         client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", builder.Configuration["GitHub:Token"]);
@@ -69,6 +71,8 @@ builder.Services.AddScoped<ILogRepository, LogRepository>();
 var app = builder.Build();
 
 app.MapControllers();
+
+app.UseSerilogRequestLogging();
 
 
 app.Run();

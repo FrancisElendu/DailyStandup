@@ -1,5 +1,6 @@
 ﻿using DailyStandup.Application.Commands;
 using DailyStandup.Application.Interface;
+using DailyStandup.Domain.Entities;
 using MediatR;
 
 namespace DailyStandup.Application.Handlers
@@ -41,7 +42,7 @@ namespace DailyStandup.Application.Handlers
                 }
                 catch (Exception ex)
                 {
-                    await _logRepo.AddAsync(new DailyStandup.Domain.Entities.LogEntry { Level = "Error", Message = ex.Message, Details = ex.ToString() }, cancellationToken);
+                    await _logRepo.AddAsync(new LogEntry { Level = "Error", Message = ex.Message, Details = ex.ToString() }, cancellationToken);
                 }
             }
 
